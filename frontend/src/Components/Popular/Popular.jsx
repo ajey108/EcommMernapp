@@ -6,7 +6,7 @@ const Popular = () => {
   return (
   
    <div className="flex flex-col items-center gap-5 h-[90vh] ">    {/* main div popular  */}
-    <h1 className='font-bold text-4xl'>POPULAR IN LAPTOPS </h1>
+    <h1 className='font-bold text-4xl'>POPULAR IN MOBILES </h1>
     <hr className='w-[200px] h-[6px] bg-gray-500 border-sm ' />
     <div className="mt-8 flex gap-9">
         {data_product.map((item,i)=>{
