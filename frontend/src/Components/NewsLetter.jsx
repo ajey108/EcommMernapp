@@ -1,38 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react'
 
-const Newsletter = () => {
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
+const NewsLetter = () => {
+  return (
+  <div className=" py-5 bg-gray-500 my-5 flex flex-col justify-center items-center w-[80%] mx-auto">
+    <h1 className='text-4xl font-bold text-white'> Get Exclusive offers on Your Email</h1>
+    <p className='text-white font-semibold mt-5'>Subscribe to our newsletter and stay updated</p>
+    <div className='my-5'>
+        <input className='bg-gray-500 text-white w-[300px] border-2 rounded-lg' type="email" placeholder='Your Email id' />
+        <button className='bg-red-500 rounded-full ml-4 w-[100px] h-[30px] text-white'> Subscribe</button>
+    </div>
+  </div>
+  )
+}
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Add your form submission logic here
-        setMessage('Thank you for subscribing!');
-        setEmail('');
-    };
-
-    return (
-        <div className=" w-[80%]flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-                <h2 className="text-2xl font-bold mb-4 text-center">Subscribe to our Newsletter</h2>
-                <p className="mb-6 text-center text-gray-600">Get the latest updates right in your inbox</p>
-                <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-                    <input 
-                        type="email" 
-                        className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Enter your email" 
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                    <button type="submit" className="bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300">
-                        Subscribe
-                    </button>
-                </form>
-                {message && <p className="mt-4 text-center text-green-500">{message}</p>}
-            </div>
-        </div>
-    );
-};
-
-export default Newsletter;
+export default NewsLetter
