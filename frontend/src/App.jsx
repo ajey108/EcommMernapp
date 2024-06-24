@@ -6,6 +6,7 @@ import ShopCategory from './Pages/ShopCategory';
 import Product from './Pages/Product';
 import Cart from './Pages/Cart';
 import LoginSignup from './Pages/LoginSignup';
+import Newsletter from './Components/NewsLetter';
 
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
    
    <BrowserRouter>
    <Navbar/>
+
    <Routes>
     <Route path = '/' element={<Shop/>}/>
     <Route path = '/mobiles' element={<ShopCategory category="mobile"/>}/>
