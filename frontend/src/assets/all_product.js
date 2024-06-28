@@ -1,7 +1,7 @@
-import p1_img from "./product_1.png";
-import p2_img from "./product_2.png";
-import p3_img from "./product_3.png";
-import p4_img from "./product_4.png";
+import p1_img from "./product_1.jpg";
+import p2_img from "./product_2.jpg";
+import p3_img from "./product_3.jpg";
+import p4_img from "./product_4.jpg";
 import p5_img from "./product_5.png";
 import p6_img from "./product_6.png";
 import p7_img from "./product_7.png";
@@ -40,8 +40,8 @@ let all_product = [
     name: "iPhone 14 Pro Max",
     category: "mobiles",
     image: p1_img,
-    new_price: 999.0,
-    old_price: 1099.0,
+    new_price: 112000.0,
+    old_price: 226000.0,
   },
   {
     id: 2,
