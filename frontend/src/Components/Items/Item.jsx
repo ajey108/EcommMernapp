@@ -5,9 +5,10 @@ const Item = (props) => {
   return (
     
     <div className='item w-85'>
-
-      <img src={props.image}/>
-     
+      <Link to ={`/product/${props.id}`}>
+    
+      <img className='w-[50px] ' src={props.image}/>
+      </Link>
        
        
         <p className='py-2 px-0'>{props.name}</p>
