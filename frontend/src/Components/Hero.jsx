@@ -20,7 +20,7 @@ const Hero = () => {
         <img
           src={rog}
           alt="Product"
-          className="w-full h-auto max-w-md object-cover rounded-lg shadow-lg"
+          className="w-[350px] h-[350px] h-auto max-w-md object-cover rounded-lg shadow-lg"
         />
       </div>
     </section>
