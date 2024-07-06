@@ -1,9 +1,13 @@
-import React from 'react';
+import {React,useContext} from 'react';
 import star_icon from '../assets/star_icon.png';
 import star_dull_icon from '../assets/star_dull_icon.png';
+import { ShopContext} from '../Context/ShopContext';
+
+
 
 const ProductDisplay = (props) => {
   const { product } = props;
+  const {addToCart} = useContext(ShopContext);
   return (
     <div className="prod-display flex flex-col md:flex-row p-4">
       <div className="left flex flex-col md:w-1/2">
@@ -41,7 +45,7 @@ const ProductDisplay = (props) => {
             <div className="border p-2 rounded text-center">6 GB 128 GB</div>
             <div className="border p-2 rounded text-center">6 GB 256 GB</div>
           </div>
-          <button className="w-[70px] bg-gray-400 text-white h-[30px] rounded-lg mb-4">Add to cart</button>
+          <button onClick={()=>{addToCart(product.id)}} className="w-[70px] bg-gray-400 text-white h-[30px] rounded-lg mb-4">Add to cart</button>
           <p className="text-gray-600"><span className="font-semibold">Category:</span> Mobiles, iPhone, Pixel</p>
           <p className="text-gray-600"><span className="font-semibold">Category:</span> Laptops, Macbook, Rog</p>
           <p className="text-gray-600"><span className="font-semibold">Category:</span> Cameras, Sony, Go Pro</p>
