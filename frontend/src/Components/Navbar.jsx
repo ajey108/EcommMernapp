@@ -36,8 +36,10 @@ const Navbar = () => {
         <button className="w-[120px] h-[40px] bg-gray-500 text-white rounded-md font-semibold hover:bg-gray-600 hover:scale-105 active:bg-gray-700 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition transform duration-200 ease-in-out">Login</button>
         </Link>
         <div className="relative">
+          <Link to='/cart'> 
           <img src={cart_icon} alt="Cart Icon" className='w-9 h-9' />
           <div className="absolute top-0 right-0 w-[22px] h-[12px] flex justify-center items-center rounded-full text-[14px] bg-red-500 text-white">0</div>
+          </Link>
         </div>
       </div>
     </div>
