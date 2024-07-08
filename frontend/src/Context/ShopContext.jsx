@@ -39,7 +39,19 @@ const ShopContextProvider =(props)=>{
         });
       };
 
-    const contextValue = {all_product,cartitems,incrementCart,addToCart,removeCart};
+
+
+
+      const decrementCart = (productId) => {
+        setCartItems((prevItems) => {
+          const updatedItems = { ...prevItems };
+          updatedItems[productId] = (updatedItems[productId] || 0) - 1;
+          return updatedItems;
+        });
+      };
+
+
+    const contextValue = {all_product,cartitems,incrementCart,decrementCart,addToCart,removeCart};
     return (
         <ShopContext.Provider value={contextValue}>
             {props.children}
