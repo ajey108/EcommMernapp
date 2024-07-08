@@ -30,7 +30,7 @@ const ShopContextProvider =(props)=>{
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
     }
 
-
+      //increase products
     const incrementCart = (productId) => {
         setCartItems((prevItems) => {
           const updatedItems = { ...prevItems };
@@ -41,7 +41,7 @@ const ShopContextProvider =(props)=>{
 
 
 
-
+      // decrease products
       const decrementCart = (productId) => {
         setCartItems((prevItems) => {
           const updatedItems = { ...prevItems };
