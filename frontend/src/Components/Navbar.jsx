@@ -8,10 +8,14 @@ const Navbar = () => {
 
   return (
     <div className='flex justify-around p-4 shadow-md'>
+       <Link to='/'> 
       <div className='flex items-center'>
+       
         <img src={logo} alt="Logo" className='w-[40px] h-[40px]' />
+       
         <h1 className='ml-2 text-xl font-bold'>GadgetStore</h1>
       </div>
+      </Link>
       <ul className="flex justify-center items-center gap-4">
         <li onClick={() => setMenu('Shop')} className="relative cursor-pointer">
           <Link to='/'>Shop</Link>
