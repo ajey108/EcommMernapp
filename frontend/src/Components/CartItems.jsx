@@ -3,7 +3,7 @@ import { ShopContext } from '../Context/ShopContext';
 import remove_icon from '../assets/cart_cross_icon.png';
 
 const CartItems = () => {
-  const { all_product,incrementCart, cartitems, removeCart } = useContext(ShopContext);
+  const { all_product,incrementCart,decrementCart, cartitems, removeCart } = useContext(ShopContext);
 
   console.log('all_product:', all_product);
   console.log('cartitems:', cartitems);
@@ -32,6 +32,10 @@ const CartItems = () => {
               <div className="col-span-1 flex justify-center">
               <button className="bg-gray-300 rounded-lg px-3 py-1" onClick={() => incrementCart(product.id)}>
                   {quantity}
+                </button>
+
+                <button className="bg-gray-300 rounded-lg ml-3 px-3 py-1" onClick={() => decrementCart(product.id)}>
+                  -
                 </button>
               </div>
               <p className="col-span-1">${total.toFixed(2)}</p>
