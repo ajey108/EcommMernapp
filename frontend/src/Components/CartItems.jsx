@@ -52,6 +52,31 @@ const CartItems = () => {
         }
         return null;
       })}
+     <div className="mt-4 p-4 bg-gray-100 rounded-lg">
+        <h1 className="text-xl font-semibold mb-4">Cart Totals</h1>
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <p className="font-semibold">Subtotal</p>
+          <p className="text-right">${0}</p>
+          <hr className="col-span-2" />
+          <p className="font-semibold">Shipping Fee</p>
+          <p className="text-right">Free</p>
+          <hr className="col-span-2" />
+          <h3 className="font-semibold">Total</h3>
+          <h3 className="text-right">${0}</h3>
+        </div>
+        <button className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
+          PROCEED TO CHECKOUT
+        </button>
+      </div>
+      <div className="mt-4 p-4 bg-gray-100 rounded-lg">
+        <p className="font-semibold mb-2">If you have a promo code, enter it here</p>
+        <div className="flex">
+          <input className="flex-1 p-2 border rounded-l-lg" type="text" placeholder='Promo code' />
+          <button className="bg-blue-500 text-white p-2 rounded-r-lg hover:bg-blue-600">
+            Submit
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
