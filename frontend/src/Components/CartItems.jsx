@@ -9,7 +9,7 @@ const CartItems = () => {
   console.log('cartitems:', cartitems);
 
   return (
-    <div className="cart-items p-4 max-w-4xl mx-auto bg-white rounded-lg shadow-md">
+    <div className="cart-items my-4 p-4 max-w-4xl mx-auto bg-white rounded-lg shadow-md">
       <div className="cart-header grid grid-cols-6 gap-4 text-lg font-semibold border-b pb-2 mb-4">
         <p className="col-span-1">Products</p>
         <p className="col-span-1">Title</p>
