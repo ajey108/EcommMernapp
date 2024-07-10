@@ -7,8 +7,9 @@ const NewCollections = () => {
   <div className="mt-4">
   <h1 className='text-center my-4 text-2xl font-bold'>New Collection</h1>
   <hr />
-  <div className="grid grid-cols-4 gap-4">
+  <div className="grid grid-cols-4 gap-3 ">
     {new_collection.map((item, i) => (
+      
         <Item 
             key={i} 
             id={item.id} 
@@ -17,6 +18,7 @@ const NewCollections = () => {
             new_price={item.new_price} 
             old_price={item.old_price} 
         />
+        
     ))}
 </div>
 

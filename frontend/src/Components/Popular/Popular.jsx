@@ -5,7 +5,7 @@ import Item from '../Items/Item'
 const Popular = () => {
   return (
 
-    <div className="flex flex-col items-center mt-5 gap-5 h-[90vh] ">    {/* main div popular  */}
+    <div className="flex flex-col items-center mt-5 gap-5  ">    {/* main div popular  */}
       <h1 className='font-bold text-4xl'>POPULAR IN MOBILES </h1>
       <hr className='w-[250px] h-[6px] bg-gray-500 border-sm ' />
       <div className="mt-4 flex gap-9">
