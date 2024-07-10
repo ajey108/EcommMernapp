@@ -3,10 +3,10 @@ import { ShopContext } from '../Context/ShopContext';
 import remove_icon from '../assets/cart_cross_icon.png';
 
 const CartItems = () => {
-  const { all_product,incrementCart,decrementCart, cartitems, removeCart } = useContext(ShopContext);
+  const { all_product, incrementCart, decrementCart, cartItems, removeCart, getTotalAmount } = useContext(ShopContext);
 
   console.log('all_product:', all_product);
-  console.log('cartitems:', cartitems);
+  console.log('cartitems:', cartItems);
 
   return (
     <div className="cart-items my-4 p-4 max-w-4xl mx-auto bg-white rounded-lg shadow-md">
@@ -19,7 +19,7 @@ const CartItems = () => {
         <p className="col-span-1">Remove</p>
       </div>
       {all_product.map((product) => {
-        const quantity = cartitems[product.id];
+        const quantity = cartItems[product.id];
         if (quantity > 0) {
           const total = product.new_price * quantity;
           return (
@@ -29,13 +29,21 @@ const CartItems = () => {
               </div>
               <p className="col-span-1">{product.name}</p>
               <p className="col-span-1">${product.new_price.toFixed(2)}</p>
-              <div className="col-span-1 flex justify-center">
-              <button className="bg-gray-300 rounded-lg px-3 py-1" onClick={() => incrementCart(product.id)}>
-                  {quantity}
-                </button>
-
-                <button className="bg-gray-300 rounded-lg ml-3 px-3 py-1" onClick={() => decrementCart(product.id)}>
+              <div className="col-span-1 flex justify-center items-center">
+                <button
+                  className="bg-gray-300 rounded-lg px-3 py-1"
+                  onClick={() => decrementCart(product.id)}
+                  aria-label="Decrease quantity"
+                >
                   -
+                </button>
+                <span className="mx-3">{quantity}</span>
+                <button
+                  className="bg-gray-300 rounded-lg px-3 py-1"
+                  onClick={() => incrementCart(product.id)}
+                  aria-label="Increase quantity"
+                >
+                  +
                 </button>
               </div>
               <p className="col-span-1">${total.toFixed(2)}</p>
@@ -45,6 +53,7 @@ const CartItems = () => {
                   src={remove_icon}
                   onClick={() => removeCart(product.id)}
                   alt="Remove"
+                  aria-label={`Remove ${product.name}`}
                 />
               </div>
             </div>
@@ -52,17 +61,17 @@ const CartItems = () => {
         }
         return null;
       })}
-     <div className="mt-4 p-4 bg-gray-100 rounded-lg">
+      <div className="mt-4 p-4 bg-gray-100 rounded-lg">
         <h1 className="text-xl font-semibold mb-4">Cart Totals</h1>
         <div className="grid grid-cols-2 gap-4 mb-4">
           <p className="font-semibold">Subtotal</p>
-          <p className="text-right">${0}</p>
+          <p className="text-right">${getTotalAmount().toFixed(2)}</p>
           <hr className="col-span-2" />
           <p className="font-semibold">Shipping Fee</p>
           <p className="text-right">Free</p>
           <hr className="col-span-2" />
           <h3 className="font-semibold">Total</h3>
-          <h3 className="text-right">${0}</h3>
+          <h3 className="text-right">${getTotalAmount().toFixed(2)}</h3>
         </div>
         <button className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
           PROCEED TO CHECKOUT
@@ -82,3 +91,5 @@ const CartItems = () => {
 };
 
 export default CartItems;
+
+
