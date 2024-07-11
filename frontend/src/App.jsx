@@ -16,7 +16,7 @@ import camdeal from './assets/camdeal.png';
 const App = () => {
   return (
    <>
-   
+
    <BrowserRouter>
    <Navbar/>
 
@@ -34,7 +34,6 @@ const App = () => {
    </Routes>
    <Footer/>
    </BrowserRouter>
- 
 
    
    </>
