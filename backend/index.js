@@ -85,8 +85,18 @@ const Products = mongoose.model("Product",{
 //api for add product
 
 app.post('/addproduct',async(req,res)=>{
+    let products = await Products.find({});
+    let id;
+    if(products.length>0){
+        let last_product_array= products.slice(-1);
+        let last_product=last_product_array[0];
+        id = last_product.id+1;
+    }
+    else{
+        id=1;
+    }
     const product = new Products({
-        id:req.body.id,
+        id:id,
         name:req.body.name,
         image:req.body.image,
         category:req.body.category,
@@ -103,6 +113,10 @@ app.post('/addproduct',async(req,res)=>{
         name:req.body.name,
     })
 })
+
+//api for delete product
+
+
 
 app.listen(port,(error)=>{
     if(!error){
