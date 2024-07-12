@@ -115,6 +115,16 @@ app.post('/addproduct',async(req,res)=>{
 })
 
 //api for delete product
+app.post('/removeproduct',async(req,res)=>{
+    await Products.findOneAndDelete({id:req.body.id});
+    console.log('removed');
+    res.json({
+        success:true,
+        name:req.body.name
+    })
+})
+
+
 
 
 
