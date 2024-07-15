@@ -6,7 +6,7 @@ import ListProduct from '../Components/ListProduct'
 
 const Admin = () => {
   return (
-<div className="flex h-screen">
+<div className="flex h-screen bg-slate-700">
   <Sidebar/>
   <Routes>
     <Route path='/addproduct' element={<AddProduct/>}/>
