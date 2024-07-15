@@ -21,10 +21,58 @@ const AddProduct = () => {
 
     const Add_Product = async () => {
         console.log(productDetails);
+        let responseData;
+        let product = productDetails;
+
+        // formdata
+        let formdata = new FormData();
+        formdata.append('product', image);
+
+        await fetch('http://localhost:4000/upload', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+            },
+            body: formdata,
+        }).then((resp) => resp.json()).then((data) => { responseData = data });
+
+        if (responseData.success) {
+            product.image = responseData.image_url;
+            console.log(product);
+
+            // Adding the product details to the database
+            await fetch('http://localhost:4000/api/products/addproduct', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+                body: JSON.stringify(product),
+            }).then((resp) => resp.json()).then((data) => {
+                if (data.success) {
+                    console.log('Product added successfully:', data);
+                    // Reset form
+                    setProductDetails({
+                        name: "",
+                        image: "",
+                        category: "laptops",
+                        new_price: "",
+                        old_price: ""
+                    });
+                    setImage(null);
+                } else {
+                    console.error('Failed to add product:', data);
+                }
+            }).catch((error) => {
+                console.error('Error:', error);
+            });
+        } else {
+            console.error('Failed to upload image:', responseData);
+        }
     }
 
     return (
-        <div className='p-6 mx-auto w-[80%] bg-gray-800 text-white shadow-lg rounded-lg'>
+        <div className='p-6 mx-auto w-[60%] bg-gray-800 text-white shadow-lg rounded-lg'>
             <h2 className="text-2xl font-semibold mb-4 text-center">Add New Product</h2>
             <div className="mb-4">
                 <label className="block mb-2 text-sm font-medium">Product Title</label>
