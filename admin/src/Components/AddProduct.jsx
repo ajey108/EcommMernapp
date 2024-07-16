@@ -6,7 +6,7 @@ const AddProduct = () => {
     const [productDetails, setProductDetails] = useState({
         name: "",
         image: "",
-        category: "women",
+        category: "laptops",
         new_price: "",
         old_price: ""
     });
@@ -41,7 +41,7 @@ const AddProduct = () => {
             console.log(product);
 
             // Adding the product details to the database
-            await fetch('http://localhost:4000/api/products/addproduct', {
+            await fetch('http://localhost:4000/api/product/addproduct', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
