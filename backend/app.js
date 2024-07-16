@@ -10,7 +10,7 @@ const port = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(cors());
-app.use('/images', express.static('uploads/images'));
+app.use('/images', express.static('Uploads/images'));
 
 // Database connection
 mongoose.connect(process.env.MONGODB_URI)
