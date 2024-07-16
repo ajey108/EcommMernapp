@@ -1,20 +1,21 @@
-import React from 'react'
-import Sidebar from '../Components/Sidebar'
-import {Routes,Route} from 'react-router-dom'
-import AddProduct from '../Components/AddProduct'
-import ListProduct from '../Components/ListProduct'
+import React from 'react';
+import Sidebar from '../Components/Sidebar';
+import { Routes, Route } from 'react-router-dom';
+import AddProduct from '../Components/AddProduct';
+import ListProduct from '../Components/ListProduct';
 
 const Admin = () => {
   return (
-<div className="flex h-screen bg-slate-700">
-  <Sidebar/>
-  <Routes>
-    <Route path='/addproduct' element={<AddProduct/>}/>
-    <Route path='/listproduct 'element={<ListProduct/>}/>
-  </Routes>
+    <div className="flex h-screen bg-slate-700">
+      <Sidebar />
+      <div className="flex-grow p-4">
+        <Routes>
+          <Route path="/addproduct" element={<AddProduct />} />
+          <Route path="/listproduct" element={<ListProduct />} />
+        </Routes>
+      </div>
+    </div>
+  );
+};
 
-</div>
-  )
-}
-
-export default Admin
+export default Admin;
