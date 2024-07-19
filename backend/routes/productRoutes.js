@@ -11,7 +11,7 @@ const router = express.Router();
 
 // Multer setup
 const storage = multer.diskStorage({
-    destination: './uploads/images',
+    destination: './Uploads/images',
     filename: (req, file, cb) => {
         cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`);
     },
