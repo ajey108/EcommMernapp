@@ -1,11 +1,12 @@
-const express = require("express");
-const multer = require("multer");
-const path = require("path");
-const {
-    getAllProducts,
-    addProduct,
-    removeProduct,
-} = require("../controllers/productController");
+import express from 'express';
+import multer from 'multer';
+import path from 'path';
+import { getAllProducts, addProduct, removeProduct } from '../controllers/productController.js';
+import { fileURLToPath } from 'url';
+
+// Create a __dirname variable to use with ES6 modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const router = express.Router();
 
@@ -32,4 +33,4 @@ router.post('/upload', upload.single('product'), (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;
