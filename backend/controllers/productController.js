@@ -1,6 +1,6 @@
-const Product = require("../models/Product");
+import Product from '../models/Product.js';
 
-const getAllProducts = async (req, res) => {
+export const getAllProducts = async (req, res) => {
     try {
         const products = await Product.find({});
         res.json(products);
@@ -9,12 +9,12 @@ const getAllProducts = async (req, res) => {
     }
 };
 
-const addProduct = async (req, res) => {
+export const addProduct = async (req, res) => {
     try {
-        let products = await Product.find({});
+        const products = await Product.find({});
         let id;
         if (products.length > 0) {
-            let last_product = products[products.length - 1];
+            const last_product = products[products.length - 1];
             id = last_product.id + 1;
         } else {
             id = 1;
@@ -39,7 +39,7 @@ const addProduct = async (req, res) => {
     }
 };
 
-const removeProduct = async (req, res) => {
+export const removeProduct = async (req, res) => {
     try {
         await Product.findOneAndDelete({ id: req.body.id });
         res.json({
@@ -49,10 +49,4 @@ const removeProduct = async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-};
-
-module.exports = {
-    getAllProducts,
-    addProduct,
-    removeProduct,
 };
