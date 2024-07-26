@@ -37,7 +37,32 @@ export const signUp = async (req, res) => {
         };
 
         // Generate token
-        const token = jwt.sign(data, process.env.JWT_SECRET || 'secret_ecom', { expiresIn: '1h' });
+        const token = jwt.sign(data, process.env.JWT_SECRET || 'secret_ecom', { expiresIn: '2h' });
+        res.json({ success: true, token });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+export const login = async (req, res) => {
+    try {
+        let user = await User.findOne({ email: req.body.email });
+        if (!user) {
+            return res.status(400).json({ success: false, error: "User not found" });
+        }
+
+        const passCompare = await bcrypt.compare(req.body.password, user.password);
+        if (!passCompare) {
+            return res.status(400).json({ success: false, error: "Invalid password" });
+        }
+
+        const data = {
+            user: {
+                id: user.id
+            }
+        };
+
+        const token = jwt.sign(data, process.env.JWT_SECRET || 'secret_ecom', { expiresIn: '2h' });
         res.json({ success: true, token });
     } catch (err) {
         res.status(500).json({ error: err.message });
