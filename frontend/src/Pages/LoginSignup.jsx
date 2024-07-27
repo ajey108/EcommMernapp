@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const LoginSignup = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: ''
   });
@@ -17,10 +17,30 @@ const LoginSignup = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission
-    console.log('Form submitted', formData);
+    let responseData;
+    try {
+      const response = await fetch(`http://localhost:4000/api/auth/${state.toLowerCase()}`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      responseData = await response.json();
+      if (responseData.success) {
+        localStorage.setItem('auth-token', responseData.token);
+        window.location.replace('/');
+        console.log('Form submitted', formData);
+      } else {
+        alert(responseData.errors);
+      }
+    } catch (error) {
+      console.error('Error during form submission', error);
+    }
   };
 
   const toggleForm = () => {
@@ -34,12 +54,12 @@ const LoginSignup = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           {state === "SignUp" && (
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700">Name</label>
               <input
                 type="text"
-                name="name"
-                id="name"
-                value={formData.name}
+                name="username"
+                id="username"
+                value={formData.username}
                 onChange={handleChange}
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
