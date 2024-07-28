@@ -1,11 +1,10 @@
-import React, { createContext, useState } from "react";
-import all_product from '../assets/all_product';
+import React, { createContext, useEffect, useState } from "react";
 
 export const ShopContext = createContext(null);
 
 const getDefaultCart = () => {
   let cart = {};
-  for (let index = 0; index < all_product.length; index++) {
+  for (let index = 0; index <= 300; index++) {
     cart[index] = 0;
   }
   return cart;
@@ -13,6 +12,14 @@ const getDefaultCart = () => {
 
 const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState(getDefaultCart());
+  const [all_product, setAll_product] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:4000/api/products/allproducts')
+      .then((response) => response.json())
+      .then((data) => setAll_product(data))
+      .catch((error) => console.error("Error fetching products:", error));
+  }, []);
 
   // Add to cart
   const addToCart = (itemId) => {
@@ -66,8 +73,6 @@ const ShopContextProvider = (props) => {
     }
     return totalItems;
   };
-
-  
 
   const contextValue = {
     all_product,
