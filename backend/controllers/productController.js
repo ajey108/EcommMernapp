@@ -1,5 +1,6 @@
 import Product from '../models/Product.js';
 
+//get all  products
 export const getAllProducts = async (req, res) => {
     try {
         const products = await Product.find({});
@@ -8,6 +9,9 @@ export const getAllProducts = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
+
+// add product
 
 export const addProduct = async (req, res) => {
     try {
@@ -39,6 +43,9 @@ export const addProduct = async (req, res) => {
     }
 };
 
+
+//remove product
+
 export const removeProduct = async (req, res) => {
     try {
         await Product.findOneAndDelete({ id: req.body.id });
@@ -50,3 +57,16 @@ export const removeProduct = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
+
+export const newCollection = async (req, res) => {
+    try {
+        let products = await Product.find({});
+        let newCollection = products.slice(-8);  // Get the last 8 products
+        console.log("New collection fetched:", newCollection);
+        res.send(newCollection);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
