@@ -1,7 +1,7 @@
 import express from 'express';
 import multer from 'multer';
 import path from 'path';
-import { getAllProducts, addProduct, removeProduct } from '../controllers/productController.js';
+import { getAllProducts, addProduct, removeProduct,newCollection } from '../controllers/productController.js';
 import { fileURLToPath } from 'url';
 
 // Create a __dirname variable to use with ES6 modules
@@ -24,6 +24,7 @@ const upload = multer({ storage: storage });
 router.get('/allproducts', getAllProducts);
 router.post('/addproduct', addProduct);
 router.post('/removeproduct', removeProduct);
+router.get('/newcollection', newCollection);
 
 // API for uploading images
 router.post('/upload', upload.single('product'), (req, res) => {
