@@ -26,6 +26,9 @@ router.post('/addproduct', addProduct);
 router.post('/removeproduct', removeProduct);
 router.get('/newcollection', newCollection);
 
+
+
+
 // API for uploading images
 router.post('/upload', upload.single('product'), (req, res) => {
     res.json({
@@ -35,3 +38,5 @@ router.post('/upload', upload.single('product'), (req, res) => {
 });
 
 export default router;
+
+
