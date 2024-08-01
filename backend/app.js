@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 import productRoutes from './routes/productRoutes.js';
 import authRoutes from './routes/authRoute.js'; // Import your auth routes
 
+
 dotenv.config();
 
 const app = express();
@@ -35,6 +36,9 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/products', productRoutes);
 app.use('/api/auth', authRoutes); 
+
+
+
 
 // Start server
 app.listen(port, (error) => {
