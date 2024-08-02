@@ -34,8 +34,8 @@ app.get('/', (req, res) => {
 });
 
 // Routes
-app.use('/api/products', productRoutes);
-app.use('/api/auth', authRoutes); 
+app.use('/api/products', productRoutes);//proudcts
+app.use('/api/auth', authRoutes); //authentication
 
 
 
