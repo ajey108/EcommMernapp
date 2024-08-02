@@ -62,7 +62,7 @@ export const removeProduct = async (req, res) => {
 export const newCollection = async (req, res) => {
     try {
         let products = await Product.find({});
-        let newCollection = products.slice(-8);  // Get the last 8 products
+        let newCollection = products.slice(-10);  // Get the last 8 products
         console.log("New collection fetched:", newCollection);
         res.send(newCollection);
     } catch (err) {
