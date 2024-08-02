@@ -58,7 +58,7 @@ export const removeProduct = async (req, res) => {
     }
 };
 
-
+//get new collection
 export const newCollection = async (req, res) => {
     try {
         let products = await Product.find({});
@@ -70,3 +70,17 @@ export const newCollection = async (req, res) => {
     }
 };
 
+
+//get popular in mobiles
+
+export const popularinMobiles = async(req,res)=>{
+    try{
+        let products = await Product.find({category:"mobiles"}); //product shcema mobile
+        let popular_in_mobiles = products.slice(0,4);
+        console.log("Popular in Mobiles Fetched");
+        res.send(popular_in_mobiles);
+
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
