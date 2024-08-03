@@ -90,7 +90,13 @@ export const popularinMobiles = async(req,res)=>{
 
 export const addtoCart =  async (req,res)=>{
     try{
-       console.log(req.body); 
+       let userData = await Users.findone({_id:req.user.id});
+       userData.cartData[req.body.itemId] += 1;
+
+       //save in db
+
+       await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
+       res.send("added")
     }catch (err) {
         res.status(500).json({ error: err.message });
     }
