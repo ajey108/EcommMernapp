@@ -1,5 +1,6 @@
 import Product from '../models/Product.js';
 
+
 //get all  products
 export const getAllProducts = async (req, res) => {
     try {
@@ -81,6 +82,16 @@ export const popularinMobiles = async(req,res)=>{
         res.send(popular_in_mobiles);
 
     } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
+
+// add products in cart
+
+export const addtoCart =  async (req,res)=>{
+    try{
+       console.log(req.body); 
+    }catch (err) {
         res.status(500).json({ error: err.message });
     }
 }
