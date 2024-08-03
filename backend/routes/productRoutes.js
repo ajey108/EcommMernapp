@@ -30,6 +30,8 @@ router.get('/popularinmobiles', popularinMobiles);
 router.post('/addtocart', fetchUser, addtoCart);
 
 
+
+
 // API for uploading images
 router.post('/upload', upload.single('product'), (req, res) => {
     if (req.file) {
