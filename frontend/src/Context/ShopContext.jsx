@@ -21,25 +21,29 @@ const ShopContextProvider = (props) => {
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
-  // Add to cart
+  // add to cart
   const addToCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-    if(localStorage.getItem('auth-token')){
-      //update id in db if logged in
-      fetch('http://localhost:4000/api/products/addtocart',{
-        method:'POST',
-        headers:{
-          Accept:'application/form-data',
-          'auth-token':`${localStorage.getItem('auth-token')}`,
-          'Content-Type':'application/json',
+    setCartItems((prev) => ({
+      ...prev,
+      [itemId]: (prev[itemId] || 0) + 1
+    }));
+  
+    if (localStorage.getItem('auth-token')) {
+      fetch('http://localhost:4000/api/products/addtocart', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'auth-token': `${localStorage.getItem('auth-token')}`,
+          'Content-Type': 'application/json',
         },
-        body:JSON.stringify({'ItemId':itemId}),
-      }).
-      then((response)=>response.json()).
-      then((data)=>console.log(data));
-
+        body: JSON.stringify({ 'ItemId': itemId }),
+      })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error('Error:', error));
     }
   };
+  
 
   // Remove from cart
   const removeCart = (itemId) => {
