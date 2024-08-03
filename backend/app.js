@@ -5,9 +5,9 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+
 import productRoutes from './routes/productRoutes.js';
 import authRoutes from './routes/authRoute.js'; // Import your auth routes
-
 
 dotenv.config();
 
@@ -17,6 +17,8 @@ const port = process.env.PORT || 4000;
 // Middleware
 app.use(express.json());
 app.use(cors());
+
+
 
 // Serve static files
 const __filename = fileURLToPath(import.meta.url);
@@ -34,11 +36,14 @@ app.get('/', (req, res) => {
 });
 
 // Routes
-app.use('/api/products', productRoutes);//proudcts
-app.use('/api/auth', authRoutes); //authentication
+app.use('/api/products', productRoutes);
+app.use('/api/auth', authRoutes);
 
-
-
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 // Start server
 app.listen(port, (error) => {
@@ -48,3 +53,5 @@ app.listen(port, (error) => {
     console.log(`Server running on port ${port}`);
   }
 });
+
+
