@@ -32,6 +32,7 @@ const LoginSignup = () => {
       });
       responseData = await response.json();
       if (responseData.success) {
+        console.log(responseData);
         localStorage.setItem('auth-token', responseData.token);
         window.location.replace('/');
         console.log('Form submitted', formData);
