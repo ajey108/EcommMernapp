@@ -21,42 +21,52 @@ const ShopContextProvider = (props) => {
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
-  // add to cart
+  // Add to cart
   const addToCart = (itemId) => {
     setCartItems((prev) => ({
       ...prev,
       [itemId]: (prev[itemId] || 0) + 1
     }));
-  
-    if (localStorage.getItem('auth-token')) {
+
+    const token = localStorage.getItem('auth-token');
+    if (token) {
       fetch('http://localhost:4000/api/products/addtocart', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'auth-token': `${localStorage.getItem('auth-token')}`,
+          'auth-token': token,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 'ItemId': itemId }),
+        body: JSON.stringify({ itemId: itemId }),
       })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error('Error:', error));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to add to cart');
+        }
+        return response.json();
+      })
+      .then((data) => console.log('Cart update response:', data))
+      .catch((error) => {
+        console.error('Error adding to cart:', error);
+       
+      });
     }
   };
-  
 
   // Remove from cart
   const removeCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+    setCartItems((prev) => ({
+      ...prev,
+      [itemId]: Math.max((prev[itemId] || 0) - 1, 0)  // Ensures quantity does not go below 0
+    }));
   };
 
   // Increment product quantity
   const incrementCart = (productId) => {
-    setCartItems((prevItems) => {
-      const updatedItems = { ...prevItems };
-      updatedItems[productId] = (updatedItems[productId] || 0) + 1;
-      return updatedItems;
-    });
+    setCartItems((prevItems) => ({
+      ...prevItems,
+      [productId]: (prevItems[productId] || 0) + 1
+    }));
   };
 
   // Decrement product quantity
@@ -72,25 +82,17 @@ const ShopContextProvider = (props) => {
 
   // Total cart amount
   const getTotalAmount = () => {
-    let totalAmount = 0;
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        let itemInfo = all_product.find((product) => product.id === Number(item));
-        totalAmount += itemInfo.new_price * cartItems[item];
+    return all_product.reduce((total, product) => {
+      if (cartItems[product.id] > 0) {
+        total += product.new_price * cartItems[product.id];
       }
-    }
-    return totalAmount;
+      return total;
+    }, 0);
   };
 
   // Total cart items
   const getTotalItems = () => {
-    let totalItems = 0;
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        totalItems += cartItems[item];
-      }
-    }
-    return totalItems;
+    return Object.values(cartItems).reduce((total, quantity) => total + (quantity > 0 ? quantity : 0), 0);
   };
 
   const contextValue = {
