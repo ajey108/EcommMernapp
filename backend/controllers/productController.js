@@ -1,4 +1,5 @@
 import Product from '../models/Product.js';
+import User from '../models/usermodel.js';
 
 
 //get all  products
@@ -90,12 +91,12 @@ export const popularinMobiles = async(req,res)=>{
 
 export const addtoCart =  async (req,res)=>{
     try{
-       let userData = await Users.findone({_id:req.user.id});
+       let userData = await User.findone({_id:req.user.id});
        userData.cartData[req.body.itemId] += 1;
 
        //save in db
 
-       await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
+       await User.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
        res.send("added")
     }catch (err) {
         res.status(500).json({ error: err.message });
