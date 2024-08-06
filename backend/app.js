@@ -26,7 +26,7 @@ const __dirname = path.dirname(__filename);
 app.use('/images', express.static(path.join(__dirname, 'Uploads/images')));
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(`Database connection error: ${err}`));
 
