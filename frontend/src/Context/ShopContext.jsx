@@ -29,6 +29,7 @@ const ShopContextProvider = (props) => {
     }));
 
     const token = localStorage.getItem('auth-token');
+    console.log(token);
     if (token) {
       fetch('http://localhost:4000/api/products/addtocart', {
         method: 'POST',
@@ -40,17 +41,22 @@ const ShopContextProvider = (props) => {
         body: JSON.stringify({ itemId: itemId }),
       })
       .then((response) => {
+        console.log('Response:', response);
         if (!response.ok) {
-          throw new Error('Failed to add to cart');
+          return response.json().then(err => {
+            throw new Error(`Failed to add to cart: ${err.error}`);
+          });
         }
         return response.json();
       })
       .then((data) => console.log('Cart update response:', data))
       .catch((error) => {
         console.error('Error adding to cart:', error);
-       
       });
+    } else {
+      console.error('No auth token found');
     }
+    
   };
 
   // Remove from cart
