@@ -14,6 +14,8 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const token = localStorage.getItem('auth-token'); // Retrieve token from localStorage
+
   return (
     <div className='flex justify-between items-center p-4 shadow-md'>
       <Link to='/'>
@@ -49,18 +51,30 @@ const Navbar = () => {
       </ul>
 
       <div className="nav-logcart flex gap-6 justify-center items-center relative">
-        {localStorage.getItem('auth-token') ? (
-          <button onClick={() => {localStorage.removeItem('auth-token'); window.location.replace('/');}} className="w-[120px] h-[40px] bg-gray-500 text-white rounded-md font-semibold hover:bg-gray-600 hover:scale-105 active:bg-gray-700 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition transform duration-200 ease-in-out">Logout</button>
+        {token ? (
+          <button 
+            onClick={() => {
+              localStorage.removeItem('auth-token'); 
+              window.location.replace('/');
+            }} 
+            className="w-[120px] h-[40px] bg-gray-500 text-white rounded-md font-semibold hover:bg-gray-600 hover:scale-105 active:bg-gray-700 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition transform duration-200 ease-in-out"
+          >
+            Logout
+          </button>
         ) : (
           <Link to='/login'>
-            <button className="w-[120px] h-[40px] bg-gray-500 text-white rounded-md font-semibold hover:bg-gray-600 hover:scale-105 active:bg-gray-700 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition transform duration-200 ease-in-out">Login</button>
+            <button className="w-[120px] h-[40px] bg-gray-500 text-white rounded-md font-semibold hover:bg-gray-600 hover:scale-105 active:bg-gray-700 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition transform duration-200 ease-in-out">
+              Login
+            </button>
           </Link>
         )}
         
         <div className="relative">
           <Link to='/cart'>
             <img src={cart_icon} alt="Cart Icon" className='w-9 h-9' />
-            <div className="absolute top-0 right-0 w-[22px] h-[12px] flex justify-center items-center rounded-full text-[14px] bg-red-500 text-white">{getTotalItems()}</div>
+            <div className="absolute top-0 right-0 w-[22px] h-[12px] flex justify-center items-center rounded-full text-[14px] bg-red-500 text-white">
+              {getTotalItems()}
+            </div>
           </Link>
         </div>
       </div>
