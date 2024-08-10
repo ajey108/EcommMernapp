@@ -3,7 +3,7 @@ import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fetchUser from '../middleware/authmiddleware.js'
-import { getAllProducts, addProduct, removeProduct, newCollection, popularinMobiles, addtoCart } from '../controllers/productController.js';
+import { getAllProducts, addProduct, removeProduct, newCollection, popularinMobiles, addtoCart, removeCart } from '../controllers/productController.js';
 
 // Create a __dirname variable to use with ES6 modules
 const __filename = fileURLToPath(import.meta.url);
@@ -28,6 +28,7 @@ router.post('/removeproduct', removeProduct);
 router.get('/newcollection', newCollection);
 router.get('/popularinmobiles', popularinMobiles);
 router.post('/addtocart', fetchUser, addtoCart);
+router.post('/removecart', fetchUser, removeCart);
 
 
 
