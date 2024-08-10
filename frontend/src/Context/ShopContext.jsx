@@ -65,6 +65,34 @@ const ShopContextProvider = (props) => {
       ...prev,
       [itemId]: Math.max((prev[itemId] || 0) - 1, 0)  // Ensures quantity does not go below 0
     }));
+    const token = localStorage.getItem('auth-token');
+    console.log(token);
+    if (token) {
+      fetch('http://localhost:4000/api/products/removecart', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'auth-token': token,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ itemId: itemId }),
+      })
+      .then((response) => {
+        console.log('Response:', response);
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(`Failed to remove from the cart: ${err.error}`);
+          });
+        }
+        return response.json();
+      })
+      .then((data) => console.log('Cart update response:', data))
+      .catch((error) => {
+        console.error('Error  removing cart:', error);
+      });
+    } else {
+      console.error('No auth token found');
+    }
   };
 
   // Increment product quantity
