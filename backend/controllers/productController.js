@@ -104,3 +104,22 @@ try{
     res.status(500).json({ error: err.message });
 }
 };
+
+//remove products from cart
+
+
+export const removeCart = async (req,res)=>{
+    try{
+        console.log('removed',req.body.itemId);
+        let userData  = await User.findOne({_id:req.user.id}); //find the user
+
+        if(userData.cartData[req.body.itemId]>0)
+        userData.cartData[req.body.itemId] -=1;
+       
+        //modify cart data and save it
+       let  user =  await User.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
+        res.send(user);  
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}

@@ -12,7 +12,7 @@ export const signUp = async (req, res) => {
 
         // Create empty cart
         let cart = {};
-        for (let i = 0; i < 300; i++) {
+        for (let i = 0; i < 70; i++) {
             cart[i] = 0;
         }
 
@@ -37,7 +37,7 @@ export const signUp = async (req, res) => {
         };
 
         // Generate token
-        const token = jwt.sign(data, process.env.JWT_SECRET || 'secret_ecom', { expiresIn: '2h' });
+        const token = jwt.sign(data, process.env.JWT_SECRET || 'secret_ecom', { expiresIn: '10h' });
         res.json({ success: true, token });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -62,7 +62,7 @@ export const login = async (req, res) => {
             }
         };
 
-        const token = jwt.sign(data, process.env.JWT_SECRET || 'secret_ecom', { expiresIn: '2h' });
+        const token = jwt.sign(data, process.env.JWT_SECRET || 'secret_ecom', { expiresIn: '10h' });
         res.json({ success: true, token });
     } catch (err) {
         res.status(500).json({ error: err.message });
